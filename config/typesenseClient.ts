@@ -1,14 +1,13 @@
-// config/typesenseClient.ts
-import Typesense from "npm:typesense";
-
+import { Typesense } from "../deps.ts";
+ 
 export const typesenseClient = new Typesense.Client({
   nodes: [
     {
-      host: "localhost",
-      port: 8108,
-      protocol: "http",
+      host: Deno.env.get("TYPESENSE_HOST")!,
+      port: Number(Deno.env.get("TYPESENSE_PORT")),
+      protocol: Deno.env.get("TYPESENSE_PROTOCOL")!,
     },
   ],
-  apiKey: "ghjklkjk", // Replace with your actual Typesense API key
+  apiKey: Deno.env.get("TYPESENSE_API_KEY")!,
   connectionTimeoutSeconds: 2,
 });

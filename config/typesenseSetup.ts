@@ -1,6 +1,8 @@
 import { typesenseClient } from "./typesenseClient.ts";
+import type { CollectionCreateSchema } from "typesense/lib/Typesense/Collections";
 
-const bookSchema = {
+// Correctly typed schema
+const bookSchema: CollectionCreateSchema = {
   name: "books",
   fields: [
     { name: "title", type: "string" },
@@ -10,7 +12,7 @@ const bookSchema = {
     { name: "rating", type: "float" },
     { name: "userId", type: "string" },
   ],
-  default_sorting_field: "rating" as const,
+  default_sorting_field: "rating",
 };
 
 export const setupTypesense = async () => {
@@ -18,17 +20,14 @@ export const setupTypesense = async () => {
     await typesenseClient.collections("books").retrieve();
     console.log(" Typesense collection 'books' already exists");
   } catch (error) {
-    // Handle Typesense "ObjectNotFound" error when collection doesn't exist
     if (error && typeof error === "object" && "message" in error) {
       const errMsg = (error as { message: string }).message;
       if (errMsg.includes("Not Found")) {
-        console.log("⚙️ Creating Typesense collection: 'books'");
+        console.log(" Creating Typesense collection: 'books'");
         await typesenseClient.collections().create(bookSchema);
         return;
       }
     }
-
-    // Any other error
-    console.error("Error setting up Typesense:", error);
+    console.error(" Error setting up Typesense:", error);
   }
 };
