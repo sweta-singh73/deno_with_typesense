@@ -1,7 +1,6 @@
 import { typesenseClient } from "./typesenseClient.ts";
 import type { CollectionCreateSchema } from "typesense/lib/Typesense/Collections";
 
-// Correctly typed schema
 const bookSchema: CollectionCreateSchema = {
   name: "books",
   fields: [

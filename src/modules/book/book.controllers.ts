@@ -11,20 +11,16 @@ export const getBooksHandler = async (_req: Request, res: Response) => {
   res.json(books);
 };
 
-// book.controllers.ts
 export const searchBooksHandler = async (req: Request, res: Response) => {
   const query = req.query.q as string;
 
-  // Ensure query is provided
   if (!query) {
     return res.status(400).json({ message: "Missing search query" });
   }
 
   try {
-    // Call the service to search books
     const books = await container.bookService.searchBooks(query);
     
-    // Return search results
     res.json(books);
   } catch (error) {
     console.error("Error searching books:", error);

@@ -1,5 +1,5 @@
-export { default as express, Router } from "npm:express"; // runtime values
-export type { Request, Response, NextFunction } from "npm:express"; // types
+export { default as express, Router } from "npm:express"; 
+export type { Request, Response, NextFunction } from "npm:express"; 
 export { default as mongoose } from "npm:mongoose";
 export { default as bcrypt } from "npm:bcryptjs";
 export { default as jwt } from "npm:jsonwebtoken";

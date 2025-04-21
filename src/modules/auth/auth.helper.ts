@@ -1,4 +1,4 @@
-// Your file (where securePassword function is defined)
+
 import { bcrypt, jwt } from "../../../deps.ts";
 
 export const securePassword = async (password: string) => {
@@ -10,7 +10,6 @@ export const securePassword = async (password: string) => {
     }
 };
 
-// Creates a JWT token for a given user ID
 export const createToken = (id: string): string => {
   try {
     if (!Deno.env.get("JWT_SECRET_KEY")) {

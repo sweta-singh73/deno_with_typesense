@@ -1,4 +1,4 @@
-// main.ts
+
 import { express, dotenv } from "./deps.ts";
 import { connectDB } from "./config/db.ts";
 import routes from "./src/routes/centerlize.routes.ts";
@@ -21,3 +21,5 @@ const port = Deno.env.get("PORT") ;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
