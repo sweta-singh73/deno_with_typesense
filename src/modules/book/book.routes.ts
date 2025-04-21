@@ -1,15 +1,15 @@
-import { Router } from "../../../deps.ts";
+import { Router } from "../../../deps.ts"; // Assuming you're using Express
 import {
   createBookHandler,
   getBooksHandler,
- 
-} from "./book.controllers.ts";
+  searchBooksHandler,
+} from "./book.controllers.ts"; // Adjust according to your file structure
 
 const router = Router();
 
-router.post("/create_book", createBookHandler);
-router.get("/", getBooksHandler);
-// router.get("/search", searchBooksHandler); 
-
+// Define your routes
+router.post("/create_book", createBookHandler); // Post route for creating a book
+router.get("/", getBooksHandler); // Get route to retrieve books
+router.get("/search", searchBooksHandler); // Get route for searching books
 
 export default router;

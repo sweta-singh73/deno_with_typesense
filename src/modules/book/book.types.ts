@@ -9,8 +9,19 @@ export interface BookDocument {
   userId: string;
 }
 
+// Define the structure for a single Typesense hit
 export interface TypesenseHit<T> {
   document: T;
+}
+
+// Define the structure for facet count in Typesense
+export interface FacetCount {
+  field_name: string;
+  counts: {
+    count: number;
+    value: string;
+  }[];
+  stats: Record<string, unknown>; // Can be refined further if needed
 }
 
 // Define the structure for the Typesense search result
@@ -18,7 +29,7 @@ export interface TypesenseSearchResult<T> {
   hits: TypesenseHit<T>[];
   found: number;
   out_of: number;
-  facet_counts: unknown[]; 
+  facet_counts: FacetCount[];
   search_time_ms: number;
 }
 

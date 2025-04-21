@@ -6,10 +6,17 @@ import { typesenseClient } from "../../../config/typesenseClient.ts";
 // Create a new book in the database and index it in Typesense
 export const createBook = async (data: CreateBookInput) => {
   const book = await Book.create(data);
-  await typesenseClient.collections("books").documents().create({
-    id: book._id.toString(),
-    ...data,
+
+  await typesenseClient.collections("books").documents().upsert({
+    id: book._id.toString(), // ensures uniqueness
+    title: book.title,
+    author: book.author,
+    summary: book.summary,
+    genre: book.genre,
+    rating: book.rating,
+    userId: book.userId,
   });
+
   return book;
 };
 
@@ -25,7 +32,7 @@ export const searchBooks = async (query: string): Promise<BookDocument[]> => {
   const result = await typesenseClient.collections("books").documents().search({
     q: query,
     query_by: "title,author,summary",
-  }) as TypesenseSearchResult<BookDocument>; 
-
+  }) as TypesenseSearchResult<BookDocument>; // Use TypesenseSearchResult<BookDocument> to type the result
+  
   return result.hits.map((hit: TypesenseHit<BookDocument>) => hit.document);
 };
